@@ -6,7 +6,29 @@
 }
 
 .header {
-    background-color: aquamarine;
+    background-color: #e27d60;
     display: flex;
     width: 100vw;
+    height: 15vh;
 }
+
+.title-icon {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 2vw;
+}
+
+.icon {
+    height: 8vh;
+    width: 6vw;
+    background:no-repeat center url('./notebook.png');
+    background-size: cover;
+}
+
+.title {
+    color: white;
+    font-size: 8vh;
+    margin-left: 1vw;
+}
+
