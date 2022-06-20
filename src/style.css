@@ -1,24 +1,39 @@
-* {
+:root {
+    --margin: 2vw;
+    --prm-green: #85dccfe1;
+    --accent-green: #41a3b3;
+    --dark-orange: #e27d60;
+    --light-orange: #e8a87c;
+}
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-    font-family: monospace;
+    font-family: inherit;
     margin: 0;
     padding: 0;
     max-width: 100%;
 }
 
-:root {
-    --margin: 2vw;
-    --dark-orange: #e27d60;
-    --light-orange: #e8a87c;
+body {
+    margin: 0;
+    font-family: monospace;
+    background-color: var(--prm-green);
+    display: grid;
+    grid:
+    "header header" auto
+    "menu   active" auto /
+    1fr 4fr;
+
 }
 
 
 .header {
+    grid-area: header;
     background-color: var(--dark-orange);
     display: flex;
-    width: 100vw;
     height: 15vh;
-    margin-bottom: 0;
 }
 
 .title-icon {
@@ -32,14 +47,9 @@
     height: 8vh;
     width: 6vw;
     background:no-repeat center url('./notebook.svg');
-    background-size: cover;
+    background-size: contain;
     filter: invert(100%);
     -webkit-filter: invert(100%);
-}
-
-.main {
-    display: flex;
-    justify-content: flex-start;
 }
 
 .title {
@@ -49,9 +59,9 @@
 }
 
 .menu {
-    background-color: #41a3b3;
+    grid-area: menu;
+    background-color: var(--accent-green);
     color: white;
-    width: 25vw;
     height: 100vh;
     margin-top: 0;
 }
@@ -76,7 +86,7 @@
 }
 
 .option {
-    width: 20vw;
+    width: 15vw;
     height: 5vh;
     background-color: var(--light-orange);
     display: flex;
@@ -111,4 +121,53 @@
 
 .project-item {
     margin-left: 35px;
+}
+
+.task-list {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    list-style: circle;
+    padding-left: 1.1em;
+}
+
+form {
+    display: flex;
+}
+.new {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+    font-size: inherit;
+    outline: none;
+    transition: border-bottom 250ms ease-in;
+    order: 2;
+}
+
+.new::placeholder {
+    color: inherit;
+    opacity: .5;
+}
+
+.new:focus {
+    border-bottom-width: 3px;
+}
+
+.new:focus::placeholder {
+    opacity: .2
+}
+
+.new.list {
+    margin-left: 10px;
+    width: 15vw;
+    margin-top: 8px;
+}
+
+.btn.list {
+    margin-left: 15px;
+}
+
+.todo-list {
+    grid-area: active;
+    margin: 20px 0 0 50px;
 }
