@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do</title>
-    <script src="bundle.js"></script>
+    <script src="bundle.js" defer></script>
 </head>
 <body>
     <div class="header">
@@ -32,13 +32,19 @@
             </li>
         </ul>
         <h2 class="projects-title">Projects</h2>
-        <ul class="projects">
-            <li class="project-item button active-list">Youtube</li>
-            <li class="project-item button">To Do</li>
-            <li class="project-item button">Portfolio</li>
+        <ul class="projects" data-projects>
+            <!-- <li class="project-item active-list">Youtube</li>
+            <li class="project-item">To Do</li>
+            <li class="project-item">Portfolio</li> -->
         </ul>
-        <form action="">
-            <input type="text" class="new list" placeholder="new list name" aria-label="new list name">
+        <form action="" data-new-project-form>
+            <input 
+            type="text"
+            data-new-project-input
+            class="new list"
+            placeholder="new list name"
+            aria-label="new list name"
+            >
             <button class="btn create list" aria-label="create new list">+</button>
         </form>
 
@@ -75,6 +81,7 @@
                     <label for="task-3">
                         <span class="custom-checkbox"></span>
                         the other thing
+                        <span class="due">(11/22/63)</span>
                     </label>
                 </div>
                 <!-- /task-3 -->
@@ -82,7 +89,16 @@
 
             <div class="new-task-creator">
                 <form action="">
-                    <input type="text" class="new task" placeholder="new task name" aria-label="new task name">
+                    <input
+                        type="text" 
+                        class="new task" 
+                        placeholder="new task name" 
+                        aria-label="new task name"
+                    >
+                    <input
+                        type="date"
+                        class="new task date"
+                    >
                     <button class="btn create task" aria-label="create new task">+</button>
                 </form>
             </div>
