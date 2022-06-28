@@ -50,7 +50,7 @@
 
     </div>
     
-    <div class="todo-list">
+    <div class="todo-list" data-todo>
         <div class="todo-header">
             <h2 class="list-title" data-project-title>YouTube</h2>
             <p class="task-count" data-task-counter>3 tasks remaining</p>
@@ -81,8 +81,8 @@
                     <label for="task-3">
                         <span class="custom-checkbox"></span>
                         the other thing
-                        <span class="due">(11/22/63)</span>
                     </label>
+                    <span class="due">(11/22/63)</span>
                 </div>
                 <!-- /task-3 -->
             </div>
@@ -111,6 +111,14 @@
             </div>
         </div>
     </div>
-    
+    <template  id="task-template">
+        <div class="task">
+            <input type="checkbox">
+            <label>
+                <span class="custom-checkbox"></span>
+            </label>
+            <span class="due"></span>
+        </div>
+    </template>
 </body>
 </html>
