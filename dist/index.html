@@ -16,9 +16,9 @@
     </div>
 
     <div class="menu">
-        <h2 class="menu-title">Menu</h2>
+        <!-- <h2 class="menu-title">Menu</h2>
         <ul class="menu-options">
-            <li class="home option button">
+            <li class="home option button" id='home' data-home-button>
                 <div class="home-icon icon"></div>
                 <div class="opt-cap">Home</div>
             </li>
@@ -30,7 +30,7 @@
                 <div class="week-icon icon"></div>
                 <div class="opt-cap">Week</div>
             </li>
-        </ul>
+        </ul> -->
         <h2 class="projects-title">Projects</h2>
         <ul class="projects" data-projects>
             <!-- <li class="project-item active-list">Youtube</li>
@@ -96,28 +96,28 @@
                         placeholder="new task name" 
                         aria-label="new task name"
                     >
-                    <input
+                    <!-- <input
                         type="date"
                         class="new task date"
                         data-new-task-date-input
-                    >
+                    > -->
                     <button class="btn create task" aria-label="create new task">+</button>
                 </form>
             </div>
 
             <div class="delete-stuff">
-                <button class="btn delete">Clear completed tasks</button>
-                <button class="btn delete">Delete list</button>
+                <button class="btn delete" data-clear-complete-tasks-button>Clear completed tasks</button>
+                <button class="btn delete" data-delete-list-button>Delete list</button>
             </div>
         </div>
     </div>
-    <template  id="task-template">
+    <template id="task-template">
         <div class="task">
-            <input type="checkbox">
+            <input type="checkbox"/>
             <label>
                 <span class="custom-checkbox"></span>
             </label>
-            <span class="due"></span>
+            <!-- <span class="due"></span> -->
         </div>
     </template>
 </body>

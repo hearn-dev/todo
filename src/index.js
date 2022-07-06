@@ -12,11 +12,15 @@ const newTaskInput = document.querySelector('[data-new-task-input]');
 const newTaskDateInput = document.querySelector('[data-new-task-date-input]');
 const taskTemplate = document.getElementById('task-template')
 const todoSection = document.querySelector('[data-todo]');
+const homeButton = document.querySelector('[data-home-button]');
+const clearCompleteTasksButtons = document.querySelector('[data-clear-complete-tasks-button]');
+const deleteListButton = document.querySelector('[data-delete-list-button]')
 let selectedProjectId;
+let selectedTaskId;
 
 
 // Initialize projects folder
-const projects = [];
+let projects = [];
 
 // Select project when clicked
 projectsContainer.addEventListener('click', e => {
@@ -31,13 +35,37 @@ projectsContainer.addEventListener('click', e => {
             const project = findProjectById(projects, selectedProjectId)
  
             // Assign name of project and task list count
-            assignProjectList(project.name);
-            assignTaskCount(project.tasks.length);
+            taskWindow(project);
             render();
         }
     }
 )
 
+// update Task count when task crossed off
+tasksContainer.addEventListener('click', e => {
+
+    if (e.target.tagName.toLowerCase() === 'input') {
+        const project = findProjectById(projects, selectedProjectId);
+        const selectedTask = project.tasks.find(task => task.id === e.target.id)
+        selectedTask.complete = e.target.checked;
+        assignTaskCount(project);
+    }
+
+  
+})
+
+clearCompleteTasksButtons.addEventListener('click', e => {
+    const selectedList = findProjectById(projects, selectedProjectId);
+    console.log(selectedList.tasks)
+    selectedList.tasks = selectedList.tasks.filter(task => !task.complete);
+    render();
+})
+
+deleteListButton.addEventListener('click', e => {
+    projects = projects.filter(project => project.id !== selectedProjectId)
+    selectedProjectId = null;
+    render();
+})
 // Create new project when form submitted
 newProjectForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -55,7 +83,7 @@ newProjectForm.addEventListener('submit', e => {
 
     // Render task window
     selectedProjectId = project.id
-    taskWindow(project.name, project.tasks.length);
+    taskWindow(project);
 
     render();
 
@@ -67,50 +95,61 @@ newTaskForm.addEventListener('submit', e => {
 
     // Assign task name and due date
     const taskName = newTaskInput.value;
-    const taskDue = newTaskDateInput.value;
+    // const taskDue = newTaskDateInput.value;
 
     // Stop if form empty
     if (taskName == null || taskName === '') return;
 
     // Create task if form filled
-    const task = createTask(taskName, taskDue)
+    const task = createTask(taskName)
 
     // Clear form
     newTaskInput.value = null;
-    newTaskDateInput.value = null
+    // newTaskDateInput.value = null
 
     // Cache task
     const project = findProjectById(projects, selectedProjectId);
     project.tasks.push(task);
 
     // Render task window
-    assignTaskCount(project.tasks.length);
+    assignTaskCount(project);
     render();
 
 });
 
 // Initialize new projects with unique id
 function createProject(name) {
-    return { id: Date.now().toString(), name: name, tasks: []}
+    return { id: Date.now().toString(), name: name, tasks: [{
+        id:'aljhsd',
+        name: 'Test',
+        complete: false
+    }, {
+        id:'aljhas',
+        name: 'Test 2',
+        complete: true
+    }]}
 }
 
 // Assign project name and task count to task list
-function assignProjectList(projectName) {
+function assignProjectList(project) {
 
     // Clear tasks
     clearElement(tasksContainer);
 
     // Assign project title to list
-    taskProjectTitle.innerText = projectName;
+    taskProjectTitle.innerText = project.name;
 }
 
 // Assign task count
-function assignTaskCount(taskNumber) {
+function assignTaskCount(project) {
+
+    const incomplete = project.tasks.filter(task => !task.complete).length;
+
     // Count tasks in project
-    if (taskNumber === 1) {
-        taskCount.innerText = `${taskNumber} task remaining`
+    if (incomplete === 1) {
+        taskCount.innerText = `${incomplete} task remaining`
     } else {
-        taskCount.innerText = `${taskNumber} tasks remaining`
+        taskCount.innerText = `${incomplete} tasks remaining`
     }
 }
 
@@ -122,8 +161,8 @@ function findProjectById(projects, projectId) {
 }
 
 // Exactly as the title says
-function createTask(taskName, due) {
-    return { id: Date.now().toString(), name: taskName, due: due };
+function createTask(taskName) {
+    return { id: Date.now().toString(), name: taskName, complete: false };
 }
 
 // Render screen
@@ -135,6 +174,9 @@ function render() {
 
     if (selectedProjectId == null || selectedProjectId == '') {
         todoSection.style.display = 'none';
+    }else if (selectedProjectId == 'home') {
+        todoSection.style.display = '';
+        taskProjectTitle.innerText = "Home";
     } else {
         todoSection.style.display = '';
         let project = findProjectById(projects, selectedProjectId);
@@ -144,9 +186,9 @@ function render() {
 }
 
 // Refresh project name and task counter
-function taskWindow(projectName, taskNumber){
-    assignProjectList(projectName);
-    assignTaskCount(taskNumber);
+function taskWindow(project){
+    assignProjectList(project);
+    assignTaskCount(project);
 }
 
 function renderProjects() {
@@ -166,7 +208,9 @@ function renderProjects() {
 function renderTasks(selectedList) {
 
     // Clear existing tasks
-    clearElement(tasksContainer);
+    if (selectedProjectId != 'home'){
+        clearElement(tasksContainer);
+    }
 
     // Render each task in list
     selectedList.forEach(task => {
@@ -176,12 +220,15 @@ function renderTasks(selectedList) {
         checkbox.id = task.id;
         checkbox.checked = task.complete;
         const label = taskElement.querySelector('label');
-        label.htmlfor = task.id;
+        label.htmlFor = task.id;
         label.append(task.name);
-        due.textContent = task.due;
+        // due.textContent = task.due;
         tasksContainer.appendChild(taskElement);
     })
+
 }
+
+
 
 // Clear container of all children
 function clearElement(element) {
