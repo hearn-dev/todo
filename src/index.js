@@ -1,4 +1,6 @@
 import './style.css';
+import {format, parseISO} from 'date-fns';
+
 
 // Assign DOM variables
 const projectsContainer = document.querySelector('[data-projects]');
@@ -54,6 +56,7 @@ tasksContainer.addEventListener('click', e => {
   
 })
 
+// Clear completed tasks when requested
 clearCompleteTasksButtons.addEventListener('click', e => {
     const selectedList = findProjectById(projects, selectedProjectId);
     console.log(selectedList.tasks)
@@ -61,11 +64,13 @@ clearCompleteTasksButtons.addEventListener('click', e => {
     render();
 })
 
+// Delete Project when requested
 deleteListButton.addEventListener('click', e => {
     projects = projects.filter(project => project.id !== selectedProjectId)
     selectedProjectId = null;
     render();
 })
+
 // Create new project when form submitted
 newProjectForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -95,17 +100,18 @@ newTaskForm.addEventListener('submit', e => {
 
     // Assign task name and due date
     const taskName = newTaskInput.value;
-    // const taskDue = newTaskDateInput.value;
+    const taskDue = newTaskDateInput.value;
+
 
     // Stop if form empty
     if (taskName == null || taskName === '') return;
 
     // Create task if form filled
-    const task = createTask(taskName)
+    const task = createTask(taskName, taskDue)
 
     // Clear form
     newTaskInput.value = null;
-    // newTaskDateInput.value = null
+    newTaskDateInput.value = null
 
     // Cache task
     const project = findProjectById(projects, selectedProjectId);
@@ -161,8 +167,8 @@ function findProjectById(projects, projectId) {
 }
 
 // Exactly as the title says
-function createTask(taskName) {
-    return { id: Date.now().toString(), name: taskName, complete: false };
+function createTask(taskName, due) {
+    return { id: Date.now().toString(), name: taskName, due: due, complete: false };
 }
 
 // Render screen
@@ -222,7 +228,7 @@ function renderTasks(selectedList) {
         const label = taskElement.querySelector('label');
         label.htmlFor = task.id;
         label.append(task.name);
-        // due.textContent = task.due;
+        due.textContent = task.due;
         tasksContainer.appendChild(taskElement);
     })
 
