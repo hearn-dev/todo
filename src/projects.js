@@ -8,15 +8,7 @@ export let selectedProjectId = {
 
 // Initialize new projects with unique id
 export function createProject(name) {
-    return { id: Date.now().toString(), name: name, tasks: [{
-        id:'aljhsd',
-        name: 'Test',
-        complete: false
-    }, {
-        id:'aljhas',
-        name: 'Test 2',
-        complete: true
-    }]}
+    return { id: Date.now().toString(), name: name, tasks: []}
 }
 
 // Find project in array based on ID

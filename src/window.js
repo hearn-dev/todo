@@ -14,6 +14,8 @@ export function render() {
 
     // Clear and set project list
     clearElement(projectsContainer);
+    // Clear existing tasks
+    clearElement(tasksContainer);
     renderProjects();
 
     if (selectedProjectId.id == null || selectedProjectId.id == '') {
@@ -21,6 +23,7 @@ export function render() {
     }else if (selectedProjectId.id == 'home') {
         todoSection.style.display = '';
         taskProjectTitle.innerText = "Home";
+        showAllTasks();
     } else {
         todoSection.style.display = '';
         let project = findProjectById(selectedProjectId.id);
@@ -61,22 +64,19 @@ export function renderProjects() {
 
 function renderTasks(selectedList) {
 
-    // Clear existing tasks
-    if (selectedProjectId.id != 'home'){
-        clearElement(tasksContainer);
-    }
-
     // Render each task in list
     selectedList.forEach(task => {
         const taskElement = document.importNode(taskTemplate.content, true)
         const checkbox = taskElement.querySelector('input');
-        const due = taskElement.querySelector('.due')
+        const due = taskElement.querySelector('.due');
         checkbox.id = task.id;
+        checkbox.classList.add(task.project);
         checkbox.checked = task.complete;
         const label = taskElement.querySelector('label');
         label.htmlFor = task.id;
         label.append(task.name);
         due.textContent = task.due;
+
         tasksContainer.appendChild(taskElement);
     })
 
@@ -87,4 +87,10 @@ function clearElement(element) {
     while (element.firstChild) {
         element.removeChild(element.firstChild);
     }
+}
+
+export function showAllTasks() {
+    projects.list.forEach(project => {
+        renderTasks(project.tasks)
+    })
 }

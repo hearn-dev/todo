@@ -1,5 +1,5 @@
 import './style.css';
-import { render, taskWindow } from './window';
+import { render, taskWindow, showAllTasks } from './window';
 import { assignTaskCount, createTask } from './tasks';
 import { projects, selectedProjectId, createProject, findProjectById } from './projects';
 import {format, parseISO} from 'date-fns';
@@ -17,6 +17,12 @@ const clearCompleteTasksButtons = document.querySelector('[data-clear-complete-t
 const deleteListButton = document.querySelector('[data-delete-list-button]')
 
 
+// Show all tasks when Home Button clicked
+homeButton.addEventListener('click', e => {
+    selectedProjectId.id = "home";
+    
+    render();
+})
 
 // Select project when clicked
 projectsContainer.addEventListener('click', e => {
@@ -41,7 +47,7 @@ projectsContainer.addEventListener('click', e => {
 tasksContainer.addEventListener('click', e => {
 
     if (e.target.tagName.toLowerCase() === 'input') {
-        const project = findProjectById(selectedProjectId.id);
+        const project = findProjectById(e.target.className);
         const selectedTask = project.tasks.find(task => task.id === e.target.id)
         selectedTask.complete = e.target.checked;
         assignTaskCount(project);
