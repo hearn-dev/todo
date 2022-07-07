@@ -100,18 +100,18 @@ newTaskForm.addEventListener('submit', e => {
 
     // Assign task name and due date
     const taskName = newTaskInput.value;
-    const taskDue = newTaskDateInput.value;
+    // const taskDue = newTaskDateInput.value;
 
 
     // Stop if form empty
     if (taskName == null || taskName === '') return;
 
     // Create task if form filled
-    const task = createTask(taskName, taskDue)
+    const task = createTask(taskName)
 
     // Clear form
     newTaskInput.value = null;
-    newTaskDateInput.value = null
+    // newTaskDateInput.value = null 
 
     // Cache task
     const project = findProjectById(projects, selectedProjectId);
