@@ -1,5 +1,5 @@
 import './style.css';
-import { render, taskWindow, showAllTasks } from './window';
+import { render, taskWindow } from './window';
 import { assignTaskCount, createTask } from './tasks';
 import { projects, selectedProjectId, createProject, findProjectById } from './projects';
 import {format, parseISO} from 'date-fns';
