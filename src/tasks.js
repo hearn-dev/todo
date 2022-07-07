@@ -23,6 +23,10 @@ export function assignTaskCount(project) {
 // Exactly as the title says
 export function createTask(taskName, due) {
   return {
-    id: Date.now().toString(), name: taskName, due, complete: false, project: selectedProjectId.id,
+    id: Date.now().toString(),
+    name: taskName,
+    due,
+    complete: false,
+    project: selectedProjectId.id,
   };
 }

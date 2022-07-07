@@ -1,94 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do</title>
     <script src="bundle.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <div class="title-icon">
-            <div class="icon"></div>
-            <div class="title">To Do</div>
-        </div>
+      <div class="title-icon">
+        <div class="icon"></div>
+        <div class="title">To Do</div>
+      </div>
     </div>
 
     <div class="menu">
-        <h2 class="menu-title">Menu</h2>
-        <ul class="menu-options">
-            <li class="home option button" id='home' data-home-button>
-                <div class="home-icon icon"></div>
-                <div class="opt-cap">Home</div>
-            </li>
-            <li class="today option button">
-                <div class="today-icon icon"></div>
-                <div class="opt-cap">Today</div>
-            </li>
-            <li class="week option button">
-                <div class="week-icon icon"></div>
-                <div class="opt-cap">Week</div>
-            </li>
-        </ul>
-        <h2 class="projects-title">Projects</h2>
-        <ul class="projects" data-projects>
-        </ul>
-        <form action="" data-new-project-form>
-            <input 
-            type="text"
-            data-new-project-input
-            class="new list"
-            placeholder="new project name"
-            aria-label="new project name"
-            >
-            <button class="btn create list" aria-label="create new list">+</button>
-        </form>
-
+      <h2 class="menu-title">Menu</h2>
+      <ul class="menu-options">
+        <li class="home option button" id="home" data-home-button>
+          <div class="home-icon icon"></div>
+          <div class="opt-cap">Home</div>
+        </li>
+        <li class="today option button">
+          <div class="today-icon icon"></div>
+          <div class="opt-cap">Today</div>
+        </li>
+        <li class="week option button">
+          <div class="week-icon icon"></div>
+          <div class="opt-cap">Week</div>
+        </li>
+      </ul>
+      <h2 class="projects-title">Projects</h2>
+      <ul class="projects" data-projects></ul>
+      <form action="" data-new-project-form>
+        <input
+          type="text"
+          data-new-project-input
+          class="new list"
+          placeholder="new project name"
+          aria-label="new project name"
+        />
+        <button class="btn create list" aria-label="create new list">+</button>
+      </form>
     </div>
-    
+
     <div class="todo-list" data-todo>
-        <div class="todo-header">
-            <h2 class="list-title" data-project-title>YouTube</h2>
-            <p class="task-count" data-task-counter>3 tasks remaining</p>
-        </div>
+      <div class="todo-header">
+        <h2 class="list-title" data-project-title>YouTube</h2>
+        <p class="task-count" data-task-counter>3 tasks remaining</p>
+      </div>
 
-        <div class="todo-body">
-            <div class="tasks" data-tasks-container>
-            </div>
+      <div class="todo-body">
+        <div class="tasks" data-tasks-container></div>
 
-            <div class="new-task-creator">
-                <form action="" data-new-task-form>
-                    <input
-                        type="text" 
-                        class="new task" 
-                        data-new-task-input
-                        placeholder="new task name" 
-                        aria-label="new task name"
-                    >
-                    <!-- <input
+        <div class="new-task-creator">
+          <form action="" data-new-task-form>
+            <input
+              type="text"
+              class="new task"
+              data-new-task-input
+              placeholder="new task name"
+              aria-label="new task name"
+            />
+            <!-- <input
                         type="date"
                         class="new task date"
                         data-new-task-date-input
                     > -->
-                    <button class="btn create task" aria-label="create new task">+</button>
-                </form>
-            </div>
-
-            <div class="delete-stuff">
-                <button class="btn delete" data-clear-complete-tasks-button>Clear completed tasks</button>
-                <button class="btn delete" data-delete-list-button>Delete list</button>
-            </div>
+            <button class="btn create task" aria-label="create new task">
+              +
+            </button>
+          </form>
         </div>
+
+        <div class="delete-stuff">
+          <button class="btn delete" data-clear-complete-tasks-button>
+            Clear completed tasks
+          </button>
+          <button class="btn delete" data-delete-list-button>
+            Delete list
+          </button>
+        </div>
+      </div>
     </div>
     <template id="task-template">
-        <div class="task">
-            <input type="checkbox"/>
-            <label>
-                <span class="custom-checkbox"></span>
-            </label>
-            <span class="due"></span>
-        </div>
+      <div class="task">
+        <input type="checkbox" />
+        <label>
+          <span class="custom-checkbox"></span>
+        </label>
+        <span class="due"></span>
+      </div>
     </template>
-</body>
+  </body>
 </html>

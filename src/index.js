@@ -2,7 +2,10 @@ import './style.css';
 import { render, taskWindow } from './window';
 import { assignTaskCount, createTask } from './tasks';
 import {
-  projects, selectedProjectId, createProject, findProjectById,
+  projects,
+  selectedProjectId,
+  createProject,
+  findProjectById,
 } from './projects';
 // import {format, parseISO} from 'date-fns';
 
@@ -14,7 +17,9 @@ const tasksContainer = document.querySelector('[data-tasks-container]');
 const newTaskForm = document.querySelector('[data-new-task-form]');
 const newTaskInput = document.querySelector('[data-new-task-input]');
 const homeButton = document.querySelector('[data-home-button]');
-const clearCompleteTasksButtons = document.querySelector('[data-clear-complete-tasks-button]');
+const clearCompleteTasksButtons = document.querySelector(
+  '[data-clear-complete-tasks-button]',
+);
 const deleteListButton = document.querySelector('[data-delete-list-button]');
 
 // Show all tasks when Home Button clicked
@@ -58,7 +63,9 @@ clearCompleteTasksButtons.addEventListener('click', () => {
 
 // Delete Project when requested
 deleteListButton.addEventListener('click', () => {
-  projects.list = projects.list.filter((project) => project.id !== selectedProjectId.id);
+  projects.list = projects.list.filter(
+    (project) => project.id !== selectedProjectId.id,
+  );
   selectedProjectId.id = null;
   render();
 });
