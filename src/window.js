@@ -89,7 +89,7 @@ function clearElement(element) {
     }
 }
 
-export function showAllTasks() {
+function showAllTasks() {
     projects.list.forEach(project => {
         renderTasks(project.tasks)
     })
