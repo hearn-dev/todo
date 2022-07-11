@@ -1,4 +1,6 @@
-import { projects, selectedProjectId, findProjectById } from './projects';
+import {
+  projects, selectedProjectId, findProjectById, save,
+} from './projects';
 import { assignTaskCount } from './tasks';
 
 const projectsContainer = document.querySelector('[data-projects]');
@@ -74,6 +76,11 @@ export function render() {
     const project = findProjectById(selectedProjectId.id);
     renderTasks(project.tasks);
   }
+}
+
+export function saveAndRender() {
+  save();
+  render();
 }
 
 // Assign project name and task count to task list

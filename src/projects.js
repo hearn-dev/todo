@@ -1,6 +1,7 @@
 /* eslint-disable import/no-mutable-exports */
 // Initialize projects folder
-export const projects = { list: [] };
+const LOCAL_STORAGE_PROJECT_KEY = 'task.lists';
+export const projects = { list: JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [] };
 
 export const selectedProjectId = { id: '' };
 
@@ -14,4 +15,8 @@ export function findProjectById(projectId) {
   const { list } = projects;
   const project = list.find((listItem) => listItem.id === projectId);
   return project;
+}
+
+export function save() {
+  localStorage.setItem(LOCAL_STORAGE_PROJECT_KEY, JSON.stringify(projects.list));
 }

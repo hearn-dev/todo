@@ -1,5 +1,6 @@
 import './style.css';
-import { render, taskWindow } from './window';
+// eslint-disable-next-line import/named
+import { render, saveAndRender, taskWindow } from './window';
 import { assignTaskCount, createTask } from './tasks';
 import {
   projects,
@@ -25,7 +26,7 @@ const deleteListButton = document.querySelector('[data-delete-list-button]');
 // Show all tasks when Home Button clicked
 homeButton.addEventListener('click', () => {
   selectedProjectId.id = 'home';
-  render();
+  saveAndRender();
 });
 
 // Select project when clicked
@@ -40,7 +41,7 @@ projectsContainer.addEventListener('click', (e) => {
 
     // Assign name of project and task list count
     taskWindow(project);
-    render();
+    saveAndRender();
   }
 });
 
@@ -58,7 +59,7 @@ tasksContainer.addEventListener('click', (e) => {
 clearCompleteTasksButtons.addEventListener('click', () => {
   const selectedList = findProjectById(selectedProjectId.id);
   selectedList.tasks = selectedList.tasks.filter((task) => !task.complete);
-  render();
+  saveAndRender();
 });
 
 // Delete Project when requested
@@ -67,7 +68,7 @@ deleteListButton.addEventListener('click', () => {
     (project) => project.id !== selectedProjectId.id,
   );
   selectedProjectId.id = null;
-  render();
+  saveAndRender();
 });
 
 // Create new project when form submitted
@@ -89,7 +90,7 @@ newProjectForm.addEventListener('submit', (e) => {
   selectedProjectId.id = project.id;
   taskWindow(project);
 
-  render();
+  saveAndRender();
 });
 
 // Create new task when form submitted
@@ -116,7 +117,7 @@ newTaskForm.addEventListener('submit', (e) => {
 
   // Render task window
   assignTaskCount(project);
-  render();
+  saveAndRender();
 });
 
 render();
