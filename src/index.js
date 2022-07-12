@@ -1,7 +1,7 @@
 import './style.css';
 // eslint-disable-next-line import/named
 import { render, saveAndRender, taskWindow } from './window';
-import { assignTaskCount, createTask } from './tasks';
+import { assignTaskCount, createTask, taskCountAll } from './tasks';
 import {
   projects,
   selectedProjectId,
@@ -26,6 +26,7 @@ const deleteListButton = document.querySelector('[data-delete-list-button]');
 // Show all tasks when Home Button clicked
 homeButton.addEventListener('click', () => {
   selectedProjectId.id = 'home';
+  taskCountAll();
   saveAndRender();
 });
 
@@ -51,7 +52,11 @@ tasksContainer.addEventListener('click', (e) => {
     const project = findProjectById(e.target.className);
     const selectedTask = project.tasks.find((task) => task.id === e.target.id);
     selectedTask.complete = e.target.checked;
-    assignTaskCount(project);
+    if (selectedProjectId.id !== 'home') {
+      assignTaskCount(project);
+    } else {
+      taskCountAll();
+    }
   }
 });
 

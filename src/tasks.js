@@ -1,17 +1,12 @@
+/* eslint-disable no-plusplus */
 import { selectedProjectId, projects } from './projects';
 
 const taskCount = document.querySelector('[data-task-counter]');
 
 // Assign task count
 export function assignTaskCount(project) {
-  let incomplete = project.tasks.filter((task) => !task.complete).length;
+  const incomplete = project.tasks.filter((task) => !task.complete).length;
 
-  if (selectedProjectId === 'home') {
-    incomplete = projects.list.forEach((listItem) => {
-      // eslint-disable-next-line no-undef
-      listItem.tasks.filter(task.filter((task) => !task.complete).length);
-    });
-  }
   // Count tasks in project
   if (incomplete === 1) {
     taskCount.innerText = `${incomplete} task remaining`;
@@ -29,4 +24,21 @@ export function createTask(taskName, due) {
     complete: false,
     project: selectedProjectId.id,
   };
+}
+
+export function taskCountAll() {
+  let incomplete = 0;
+
+  projects.list.forEach((project) => {
+    project.tasks.forEach((task) => {
+      if (!task.complete) {
+        incomplete++;
+      }
+    });
+  });
+  if (incomplete === 1) {
+    taskCount.innerText = `${incomplete} task remaining`;
+  } else {
+    taskCount.innerText = `${incomplete} tasks remaining`;
+  }
 }
